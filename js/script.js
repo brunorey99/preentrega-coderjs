@@ -51,7 +51,7 @@ function showMovies(array) {
             <div class="card-body">
               <h5 class="card-title">${movie.title}</h5>
               <p>${movie.director}</p>
-              <select id="selectShowtime${movie.id}" class="form-select form-select-sm w-50 mb-3" aria-label=".form-select-sm example">
+              <select id="selectShowtime${movie.id}" class="form-select form-select-sm w-auto mb-3" aria-label=".form-select-sm example">
                 <option value="1">${movie.showtime1}</option>
                 <option value="2">${movie.showtime2}</option>
               </select>
@@ -112,6 +112,10 @@ function searcher(array, input) {
         showMovies(searchedMovie)
 }
 
+//
+// filtrado por edad
+//
+
 function searchByAge(array, selectValue) {
     if (selectValue == 1){
         let ratedG = array.filter(
@@ -128,7 +132,7 @@ function searchByAge(array, selectValue) {
 
 
 searchMovie.addEventListener('input', () => searcher(movies, searchMovie.value))
-selectOption.addEventListener('click', () => searchByAge(movies, selectOption.value))
+selectOption.addEventListener('change', () => searchByAge(movies, selectOption.value))
 btnCart.addEventListener('click', () => showCartDom(shoppingCart))
 
 
