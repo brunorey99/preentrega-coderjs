@@ -1,4 +1,15 @@
-//app de cine
+
+
+// hola nacho y profe jaja
+// mi proyecto es una app de cine, tiene buscador por nombre y director, filtro por edad, selector de horario y carrito
+// usé bootstrap y toastify
+// la parte de asincronia fue la que más me costó y no creo que la haya entendido del todo
+// la verdad es que debería haberle puesto mas tiempo al proyecto, agregarle mas funciones 
+// y hacer un diseño más personalizado y muchas veces lo dejé a último momento (como ahora :'( ),
+// pero dentro de todo me esforcé en hacerlo lo más prolijo posible, y estoy contento con el avance que hice.
+// mañana arranco el curso de react.
+// les agradezco profe y tutores por la cursada,
+// éxitos!
 
 class Movie {
     constructor(id, title, price, director, showtime1, showtime2, room, age, img) {
@@ -17,19 +28,27 @@ class Movie {
     }
 }
 
-const movie1 = new Movie(1, 'Alien', 2200, 'Ridley Scott', '19:30', '23:00', 1, 18, 'alien.jpg');
-const movie2 = new Movie(2, 'The Shining', 3000, 'Stanley Kubrick', '19:00', '23:30', 2, 18, 'the-shining.jpg');
-const movie3 = new Movie(3, 'Hereditary', 3000, 'Ari Aster', '21:30', '01:30', 1, 18, 'hereditary.jpg');
-const movie4 = new Movie(4, 'Midsommar', 3000, 'Ari Aster', '21:00', '01:00', 2, 18, 'midsommar.jpg');
-const movie5 = new Movie(5, 'Suspiria', 3000, 'Dario Argento', '21:30', '23:30', 3, 16, 'suspiria.jpg');
-const movie6 = new Movie(6, 'The Thing', 3000, 'John Carpenter', '20:30', '22:30', 3, 14, 'the-thing.jpg');
-
-
 const shoppingCart = JSON.parse(localStorage.getItem("shoppingCart")) ?? [];
 const movies = [];
-movies.push(movie1, movie2, movie3, movie4, movie5, movie6);
 
+const loadMovies = async () =>{
+    const resp = await fetch("movies.json")
+    const movieData = await resp.json()
+    for(let movie of movieData){
+        let moviesArr = new Movie (movie.id, movie.title, movie.price, movie.director, movie.showtime1, movie.showtime2, movie.room, movie.age, movie.img)
+        movies.push(moviesArr)
+    }
+    localStorage.setItem("listOfMovies", JSON.stringify(movies))
+}
 
+if (localStorage.getItem("listOfMovies")) {
+    for (let movie of JSON.parse(localStorage.getItem("listOfMovies"))){
+        let storageMovies = new Movie (movie.id, movie.title, movie.price, movie.director, movie.showtime1, movie.showtime2, movie.room, movie.age, movie.img)
+        movies.push(storageMovies)
+    }
+} else {
+    loadMovies()
+}
 
 let searchMovie = document.getElementById('searchMovie')
 let selectOption = document.getElementById('selectOrden')
@@ -74,10 +93,17 @@ function showMovies(array) {
 function addToCart(array, item, selectedST) {
     let inCart = array.find(movie => movie.id == item.id)
     if (inCart == undefined) {
-        array.push(item)
-        item.selectedST = (selectedST === 1) ? item.showtime1 : item.showtime2
+        array.push(item);
+        item.selectedST = (selectedST === 1) ? item.showtime1 : item.showtime2;
+        Toastify({
+            text: `Agregaste ${item.title} al carrito.`,
+            duration: 2000
+            }).showToast();
     } else {
-        console.log(`La película ${item.title} ya existe en el carrito`)
+        Toastify({
+            text: `${item.title} ya está en el carrito.`,
+            duration: 2000
+            }).showToast();
     }
     localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
 }
@@ -136,4 +162,7 @@ selectOption.addEventListener('change', () => searchByAge(movies, selectOption.v
 btnCart.addEventListener('click', () => showCartDom(shoppingCart))
 
 
-showMovies(movies)
+// showMovies(movies)
+setTimeout(()=>{
+    showMovies(movies)
+},1000)

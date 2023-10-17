@@ -1,0 +1,68 @@
+[
+    {
+        "id": 1,
+        "title": "Alien",
+        "price": 3000,
+        "director": "Ridley Scott",
+        "showtime1": "19:30",
+        "showtime2": "23:00",
+        "room": 1,
+        "age": 18,
+        "img": "alien.jpg"
+    },
+    {
+        "id": 2,
+        "title": "The Shining",
+        "price": 3000,
+        "director": "Stanley Kubrick",
+        "showtime1": "19:00",
+        "showtime2": "23:00",
+        "room": 2,
+        "age": 18,
+        "img": "the-shining.jpg"
+    },
+    {
+        "id": 3,
+        "title": "Hereditary",
+        "price": 3000,
+        "director": "Ari Aster",
+        "showtime1": "21:30",
+        "showtime2": "01:30",
+        "room": 1,
+        "age": 18,
+        "img": "hereditary.jpg"
+    },
+    {
+        "id": 4,
+        "title": "Midsommar",
+        "price": 3000,
+        "director": "Ari Aster",
+        "showtime1": "21:00",
+        "showtime2": "01:00",
+        "room": 2,
+        "age": 18,
+        "img": "midsommar.jpg"
+    },
+    {
+        "id": 5,
+        "title": "Suspiria",
+        "price": 3000,
+        "director": "Dario Argento",
+        "showtime1": "21:30",
+        "showtime2": "23:30",
+        "room": 3,
+        "age": 16,
+        "img": "suspiria.jpg"
+    },
+    {
+        "id": 6,
+        "title": "The Thing",
+        "price": 3000,
+        "director": "John Carpenter",
+        "showtime1": "20:30",
+        "showtime2": "22:30",
+        "room": 3,
+        "age": 14,
+        "img": "the-thing.jpg"
+    }
+]
